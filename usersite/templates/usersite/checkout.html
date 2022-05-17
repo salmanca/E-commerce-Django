@@ -1,0 +1,62 @@
+{% extends 'usersite/index.html' %}
+{% block title %}Checkout{% endblock title %}
+    {% block contents %}
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Checkout</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="{% url 'user-home' %}">Home</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Checkout</p>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+{% block payment %}
+    <!-- Checkout Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5">
+            <div class="col-lg-8">
+                <div class="mb-4">
+                    <h4 class="font-weight-semi-bold mb-4">Address</h4>
+                    <div class="row">
+                    <form action='' method="POST" class="w-100"> 
+                        {% csrf_token %}
+                        <div class="col-md-12">
+                            {{form.as_p}}
+                        </div>
+                        <button type='submit' class='btn btn-outline-primary btn-block'>Proceed</button>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock payment %}
+    <!-- Checkout End -->
+{% comment %} 
+    <script>
+        var form = document.getElementById('address-form')
+        var place = document.getElementById('place-order')
+
+        form.addEventListener('submit',function(e){
+            e.preventDefault()
+            console.log('form-submited')
+            document.getElementById('Proceed').classList.add('fade')
+            document.getElementById('place-order').classList.remove('fade')
+
+        })
+
+        form.addEventListener("input", function(e){
+            e.preventDefault()
+            document.getElementById('Proceed').classList.remove('fade')
+            document.getElementById('place-order').classList.add('fade')
+        });
+        place.addEventListener('click', function(e){
+            form.submit()
+        })
+
+    </script> {% endcomment %}
+    {% endblock contents %}

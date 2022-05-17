@@ -1,0 +1,16 @@
+{% extends 'usersite/index.html' %}
+{% block title %}Order Place{% endblock title %}
+{% block contents %}
+<div class="flex justify-between items-center py-[25px] pl-[47px] pr-[42px] border-black border border-x-0">
+    <img class="w-[82px] h-[53px]" />
+    <span class="font-medium text-[12px] leading-[14px] uppercase tracking-[0.6px]"></span>
+  </div>
+  <h4 class="font-medium text-center mt-[60px] text-[20px] leading-[24px] tracking-[0.6px] uppercase">Thank you</h4>
+  <p class="font-serif text-center mx-5 mt-5">Hi, We have received your order and are prepping it for shipment. Your tracking information will be sent as soon as it is available.</p>
+  <div class="mt-5 d-flex justify-content-around text-center uppercase">
+    <a href="{% url 'user-orders' %}" class="text-primary">Track Your Order</a>
+    <span class="ml-5 mr-[2px]">OR</span>
+    <a class="font-bold" href="{% url 'user-home' %}">Continue Shopping</a>
+  </div>
+{% endblock contents %}
+    

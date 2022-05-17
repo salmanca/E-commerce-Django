@@ -1,0 +1,187 @@
+{% extends 'adminsite/index.html' %}
+
+{% block contents %}
+<div class="content"> 
+    <div class="container">
+      <div class="row mt-5">
+        <table class="table table-striped table-hover">
+          <thead>
+              <tr>
+                <th scope="col">User</th>
+                <th scope="col">User Id</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col" calss='text-right'>Orders</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if user is None %}<tr>
+                <td colspan="5">NO MATCH IN USER</td>
+              </tr>{% endif %}
+              {% for user in users %}
+              <tr>
+                <td scope="row"><a href={% url 'view_user' user.id %}>{{user.username}}</a></td>
+                <td scope="row">{{user.id}}</td>
+                <td scope="row">{{user.email}}</td>
+                <td scope="row">{{user.phone_number}}</td>
+                <td scope="row"> {% for order in user.order_set.all %}<a href={% url 'view_orders' order.id %}>{{order.id}}<br></a>{% endfor %}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    </div>         
+  </div>
+</div>
+  <div class="contents mt-5 ">
+    <nav aria-label="Page navigation">
+      <ul class="pagination justify-content-center">
+        {% if user_page.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page=1">&laquo;</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{user_page.previous_page_number}}">{{user_page.previous_page_number}}</a></li>
+        {% endif %}
+        <li class="page-item"><a class="page-link disabled" href="?page={{user_page.number}}">{{user_page.number}}</a></li>
+        {% if user_page.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{user_page.next_page_number}}">{{user_page.next_page_number}}</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{user_page.paginator.num_pages}}">&raquo;</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>  
+
+
+  <div class="content">
+  </br>
+              <table class="table table-striped table-hover">
+                  <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">View or Edit</th>
+                        <th scope="col">Delete</th>
+                        <th scope="col"><a href={% url 'add_products'%} class='btn btn-outline-info float-right'>Add</a></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for product in products %}
+                      <tr>
+                        <th scope="row">{{product.title}}</th>
+                        <th scope="row"><img class='img-thumbnail' src="{{product.imageURL}}" width="50"></th>
+                        <th scope="row">{{product.stock}}</th>
+                        <th scope="row">{{product.category}}</th>
+                        <th scope="row">{{product.price}}</th>
+                        <td><a href={% url 'edit_products' product.id %} class='btn btn-outline-success'>View or Edit</a></td>
+                        <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                          Delete
+                         </button></td>
+                        <td></td>
+                      </tr>
+                      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Deleting</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              Deleting this item
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <a href={% url 'delete_products' product.id %} class="btn btn-danger">Delete</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      {% endfor %}
+                    </tbody>
+                </table>
+                <div class="contents mt-5 ">
+                  <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                      {% if products_page.has_previous %}
+                      <li class="page-item"><a class="page-link" href="?page=1">&laquo;</a></li>
+                      <li class="page-item"><a class="page-link" href="?page={{products_page.previous_page_number}}">{{products_page.previous_page_number}}</a></li>
+                      {% endif %}
+                      <li class="page-item"><a class="page-link disabled" href="?page={{products_page.number}}">{{products_page.number}}</a></li>
+                      {% if products_page.has_next %}
+                      <li class="page-item"><a class="page-link" href="?page={{products_page.next_page_number}}">{{products_page.next_page_number}}</a></li>
+                      <li class="page-item"><a class="page-link" href="?page={{products_page.paginator_num_pages}}">&raquo;</a></li>
+                      {% endif %}
+                    </ul>
+                  </nav>
+                </div>
+                
+  </div>
+
+
+<div class="content">
+  </br>
+              <table class="table table-striped table-hover">
+                  <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Number of Products</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                        <th scope="col"><a href={% url 'add_categories'%} class='btn btn-outline-info float-right'>Add</a></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for category in categories %}
+                      <tr>
+                        <th scope="row">{{category.name}}</th>
+                        <th scope="row">{{category.products_set.all.count}}</th>
+                        <td><a href={% url 'edit_categories' category.id %} class='btn btn-outline-success'>Edit</a></td>
+                        <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                          Delete
+                         </button></td>
+                        <td></td>
+                      </tr>
+                      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Deleting</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              Deleting this item
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <a href={% url 'delete_categories' category.id %} class="btn btn-danger">Delete</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      {% endfor %}
+                    </tbody>
+                </table>
+                <div class="contents mt-5 ">
+                  <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                      {% if categories_page.has_previous %}
+                      <li class="page-item"><a class="page-link" href="?page=1">&laquo;</a></li>
+                      <li class="page-item"><a class="page-link" href="?page={{categories_page.previous_page_number}}">{{categories_page.previous_page_number}}</a></li>
+                      {% endif %}
+                      <li class="page-item"><a class="page-link disabled" href="?page={{categories_page.number}}">{{categories_page.number}}</a></li>
+                      {% if categories_page.has_next %}
+                      <li class="page-item"><a class="page-link" href="?page={{categories_page.next_page_number}}">{{categories_page.next_page_number}}</a></li>
+                      <li class="page-item"><a class="page-link" href="?page={{categories_page.paginator_num_pages}}">&raquo;</a></li>
+                      {% endif %}
+                    </ul>
+                  </nav>
+                </div>  
+                <!-- Modal -->
+  
+          
+  </div>
+
+{% endblock contents %}

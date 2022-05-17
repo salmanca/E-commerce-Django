@@ -1,0 +1,60 @@
+{% extends 'adminsite/index.html' %}
+{% block contents %}
+<link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet" />
+<div class="content">
+  <h3 class = 'mb-3'>Orders</h3>
+<table id="example" class="display" style="width:100%">
+  <thead>
+      <tr>
+        <th scope="col">User</th>
+        <th scope="col">Order Id</th>
+        <th scope="col">Ordered Date</th>
+        <th scope="col">Total Price</th>
+        <th scope="col">View or Edit</th>
+        <th scope="col">Delivery Status</th>
+      </tr>
+  </thead>
+  <tbody>
+    {% for order in orders %}
+    <tr>
+      <td scope="row">{{order.user.username}}</td>
+      <td scope="row">{{order.id}}</td>
+      <td scope="row">{{order.ordered_date}}</td>
+      <td scope="row">{{order.get_ordered_total|floatformat:2}}</td>
+      <td><a href={% url 'view_orders' order.id %} class='btn btn-outline-success'>View or Edit</a></td>
+      <td>{% if  order.cancel%}
+        <div class="step active"> <span class="icon"> <i class="fa fa-cancel"></i> </span> <span class="text">Order Canceled</span> </div>
+        {% elif order.returning%}
+        <div class="step active"> <span class="icon"> <i class="fa fa-cancel"></i> </span> <span class="text">Order Returned</span> </div>
+        {% elif  order.conformed and not order.shiped and not order.being_delivered and not order.received%}
+        <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order Placed</span> </div>
+        {% elif  order.conformed and order.shiped and not order.being_delivered and not order.received%}
+        <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Order Shiped</span> </div>
+        {% elif  order.conformed and order.shiped and order.being_delivered and not order.received%}
+        <div class="step"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Out to Delivery </span> </div>
+        {% else %}
+        <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Delivered</span> </div>
+        {% endif %}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock contents %}
+
+{% block pagejavascript %}
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#example').DataTable( {
+        "pagingType": "full_numbers",
+        buttons: ['copy', 'excel', 'pdf']
+    } );
+    
+} );
+  </script>
+{% endblock pagejavascript %}

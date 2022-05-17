@@ -1,0 +1,137 @@
+{% extends 'usersite/index.html' %}
+{% load static %}
+{% block title %}Cart{% endblock title %}
+    {% block contents %}
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Shopping Cart</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="{% url 'user-home' %}">Home</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Shopping Cart</p>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Cart Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5">
+            <div class="col-lg-8 table-responsive mb-5">
+                <table class="table table-bordered text-center mb-0">
+                    <thead class="bg-secondary text-dark">
+                        <tr>
+                            <th>Products</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody class="align-middle">
+                        {% for item in items %}
+                        <tr>
+                            <td class="align-middle"><img src="{{item.item.imageURL}}" alt="" style="width: 50px;">{{item.item.title}}</td>
+                            <td class="align-middle">₹{{item.item.price|floatformat:2}}</td>
+                            <td class="align-middle">
+                                <div class="input-group quantity mx-auto" style="width: 100px;">
+                                    <div class="input-group-btn">
+                                        <button data-product={{item.item.id}} data-action="sub" class="btn btn-sm btn-primary btn-minus update-cart" >
+                                        <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="{{item.quantity}}">
+                                    <div class="input-group-btn">
+                                        <button data-product={{item.item.id}} data-action="add" class="btn btn-sm btn-primary btn-plus update-cart">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="align-middle">₹{{item.get_total|floatformat:2}}</td>
+                            <td class="align-middle"><button data-product={{item.item.id}} data-action="remove" class="btn btn-sm btn-primary update-cart"><i class="fa fa-times"></i></button></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-4">
+                
+                <form class="mb-5" action="" method="POST">
+                    {% csrf_token %}
+                    {% if not 'coupon_id' in request.session%}
+                    <div class="input-group">
+                        {{form}}
+                        <div class="input-group-append">
+                            <button type='submit' class="btn btn-primary">Apply Coupon</button>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="input-group">
+                        <input type='hidden' name="cancel" value='on'>
+                        <div class="input-group-append">
+                            <button type='submit' class="btn btn-danger">Cancel Coupon</button>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div id='message_in' class="d-none"></div>
+                </form>
+                
+                <div class="card border-secondary mb-5">
+                    <div class="card-header bg-secondary border-0">
+                        <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-3 pt-1">
+                            <h6 class="font-weight-medium">Subtotal</h6>
+                            <h6 class="font-weight-medium">₹{{cart.get_cart_total|floatformat:2}}</h6>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h6 class="font-weight-medium">Items</h6>
+                            <h6 class="font-weight-medium">{{cart.get_cart_items}}</h6>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3 pt-1">
+                            <h6 class="font-weight-medium">Coupon Discount</h6>
+                            <h6 class="font-weight-medium">₹{{discount|floatformat:2}}</h6>
+                        </div>
+                    </div>
+                    <div class="card-footer border-secondary bg-transparent">
+                        <div class="d-flex justify-content-between mt-2">
+                            <h5 class="font-weight-bold">Total</h5>
+                            <h5 class="font-weight-bold">₹{{total_discount|floatformat:2}}</h5>
+                        </div>
+                        <a href={% url 'checkout' %} class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Cart End -->
+    <script>
+        
+        {% for message in messages %}
+            var message_sr = '{{message}}'
+            var message_in = document.getElementById('message_in')
+            if (message_sr == 'Coupon Not Exists'){
+                message_in.classList.add('text-danger')
+                message_in.classList.remove('d-none')
+                message_in.innerHTML = message_sr
+            }
+            else if (message_sr == 'Coupon Applied'){
+                console.log('here')
+                message_in.classList.add('text-success')
+                message_in.classList.remove('d-none')
+                message_in.innerHTML = message_sr
+            }
+            else if (message_sr == 'Coupon Removed'){
+                console.log('here')
+                message_in.classList.add('text-success')
+                message_in.classList.remove('d-none')
+                message_in.innerHTML = message_sr
+            }
+        {% endfor %}
+        
+    </script>
+    {% endblock contents %}

@@ -1,0 +1,72 @@
+{% extends 'adminsite/index.html' %}
+
+{% block contents %}
+<div class="content">
+  <div class="container">
+    <h3>User Details</h3>
+    <div class="row mt-5">
+      <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+              <th scope="col">Code:</th>
+              <th scope="col">{{coupon.code}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td scope="row">Valid From:</td>
+              <td scope="row">{{coupon.valid_from}}</td>
+            </tr>
+            <tr>
+              <td scope="row">Valid To: </td>
+              <td scope="row">{{coupon.valid_to}}</td>
+            </tr>
+            <tr>
+              <td scope="row">Discount: </td>
+              <td scope="row">{{coupon.discount}}</td>
+            </tr>
+            <tr>
+              <td scope="row">Active: </td>
+              {% if coupon.active %}
+              <td scope="row">Yes</td>
+              {% else %}
+              <td scope="row">No</td>
+              {% endif %}
+            </tr>
+          </tbody>
+      </table>
+      <a href={% url 'coupon_edit' coupon.id %} class="card-link btn btn-outline-success mx-2">Edit</a>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#{{coupon.id}}">
+       Delete
+      </button>
+  </div>         
+</div>
+
+      
+
+<!-- Modal -->
+<div class="modal fade" id="{{coupon.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Deleting</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Do You Want To Delete
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <a href={% url 'coupon_delete' coupon.id %} class="btn btn-danger">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        
+</div>
+{% endblock contents %}

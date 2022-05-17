@@ -1,0 +1,14 @@
+{% extends 'adminsite/index.html' %}
+{% block contents %}
+<h3>{{title}}</h3>
+<form action='' method='POST' enctype="multipart/form-data">
+    {% csrf_token %}
+    <br>
+    <div class='container m-5 col-4'>
+    {{form.as_p}}
+    <input type='submit' class='btn btn-outline-success mt-2' value='Add'>
+    </div>
+</form>
+
+
+{% endblock contents %}

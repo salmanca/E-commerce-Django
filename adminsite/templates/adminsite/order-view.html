@@ -1,0 +1,68 @@
+{% extends 'adminsite/index.html' %}
+
+{% block contents %}
+<div class="content">
+    <h3>Order Details</h3>
+</br>
+<table class="table table-striped table-hover">
+  <thead>
+      <tr>
+        <th scope="col">User:</th>
+        <th scope="col">{{order.user.username}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td scope="row">Odered Date: </td>
+        <td scope="row">{{order.ordered_date}}</td>
+      </tr>
+      {% for order_item in order_items %}
+      <tr>
+        <td scope="row">Items: </td>
+        <td scope="row">{{order_item.item.title}}</td>
+      </tr>
+      <tr>
+        <td scope="row">Quantity: </td>
+        <td scope="row">{{order_item.quantity}}</td>
+      </tr>
+      <tr>
+        <td scope="row">Image: </td>
+        <td scope="row"><img src={{order_item.item.imageURL}} width="100" alt="product-image"></td>
+      </tr>
+      {% endfor %}
+      <tr>
+        <td scope="row">Address: </td>
+        <td scope="row">{{address.apartment_address}}, {{address.street_address}}, {{address.country}}, {{address.zip}}</td>
+      </tr>
+      <tr>
+        <td scope="row">Status:</td>
+        <td scope="row">{% if  order.cancel%}
+          <div class="step active"> <span class="icon"> <i class="fa fa-cancel"></i> </span> <span class="text">Order Canceled</span> </div>
+          {% elif  order.conformed and not order.shiped and not order.being_delivered and not order.received%}
+          <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order Placed</span> </div>
+          {% elif  order.conformed and order.shiped and not order.being_delivered and not order.received%}
+          <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Order Shiped</span> </div>
+          {% elif  order.conformed and order.shiped and order.being_delivered and not order.received%}
+          <div class="step"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Out to Delivery </span> </div>
+          {% else %}
+          <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Delivered</span> </div>
+          {% endif %}</td>
+      </tr>
+      {% if order.received %}
+      <tr>
+        <td scope="row">Delivery Date: </td>
+        <td scope="row">{{order.delivery_date}}</td>
+      </tr>
+      {% endif %}
+    </tbody>
+  </div>
+  
+</div>
+</table>
+<div class="container">
+  <a href={% url 'orders' %} class="card-link btn btn-outline-success">Back</a>
+  <a href={% url 'edit_orders' order.id %} class="card-link btn btn-outline-warning">Edit</a>
+  </div>
+        
+</div>
+{% endblock contents %}

@@ -1,0 +1,45 @@
+{% extends 'adminsite/index.html' %}
+
+{% block contents %}
+<link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet" />
+<div class="content">
+  <h3 class = 'mb-3'>Users</h3>
+<table id="example" class="display" style="width:100%">
+  <thead>
+    <tr>
+      <th scope="col">User</th>
+      <th scope="col">User Id</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone Number</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in user_page %}
+    <tr>
+      <td scope="row"><a href={% url 'view_user' user.id %}>{{user.username}}</a></td>
+      <td scope="row">{{user.id}}</td>
+      <td scope="row">{{user.email}}</td>
+      <td scope="row">{{user.phone_number}}</td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+</div>
+{% endblock contents %}
+
+{% block pagejavascript %}
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#example').DataTable( {
+        "pagingType": "full_numbers",
+        buttons: ['copy', 'excel', 'pdf']
+    } );
+    
+} );
+  </script>
+{% endblock pagejavascript %}

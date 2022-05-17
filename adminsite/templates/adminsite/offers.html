@@ -1,0 +1,122 @@
+{% extends 'adminsite/index.html' %}
+{% block styles %}
+
+{% endblock styles %}
+
+{% block contents %}
+<link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet" />
+<div class="content">
+    <h2 class='mb-3'>Coupons</h2>
+<table id="example" class="display" style="width:100%">
+  <thead>
+      <tr>
+        <th scope="col">Code</th>
+        <th scope="col">Valid From</th>
+        <th scope="col">Valid To</th>
+        <th scope="col">Discount</th>
+        <th scope="col">View</th>
+        <th scope="col"><a href={% url 'coupon_add'%} class='btn btn-outline-info float-right'>Add</a></th>
+      </tr>
+  </thead>
+  <tbody>
+    {% for coupon in coupons %}
+    <tr>
+      <td scope="row">{{coupon.code}}</td>
+      <td scope="row">{{coupon.valid_from}}</td>
+      <td scope="row">{{coupon.valid_to}}</td>
+      <td scope="row">{{coupon.discount}}</td>
+      <td><a href={% url 'coupon_view' coupon.id %} class='btn btn-outline-success'>View</a></td>
+      <td></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+<h2 class='mt-5 mb-3'>Categories Offers</h2>
+<table id="category" class="display" style="width:100%">
+  <thead>
+      <tr>
+        <th scope="col">Category</th>
+        <th scope="col">Valid From</th>
+        <th scope="col">Valid To</th>
+        <th scope="col">Discount</th>
+        <th scope="col">View</th>
+        <th scope="col"><a href={% url 'category_offer_add'%} class='btn btn-outline-info float-right'>Add</a></th>
+      </tr>
+  </thead>
+  <tbody>
+    {% for category in category_off %}
+    <tr>
+      <td scope="row">{{category.category}}</td>
+      <td scope="row">{{category.valid_from}}</td>
+      <td scope="row">{{category.valid_to}}</td>
+      <td scope="row">{{category.discount}}</td>
+      <td><a href={% url 'category_offer_view' category.id %} class='btn btn-outline-success'>View</a></td>
+      <td></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+<h2 class='mb-3 mt-5'>Products Offers</h2>
+<table id="product" class="display" style="width:100%">
+  <thead>
+      <tr>
+        <th scope="col">Product</th>
+        <th scope="col">Valid From</th>
+        <th scope="col">Valid To</th>
+        <th scope="col">Discount</th>
+        <th scope="col">View</th>
+        <th scope="col"><a href={% url 'product_offer_add'%} class='btn btn-outline-info float-right'>Add</a></th>
+      </tr>
+  </thead>
+  <tbody>
+    {% for product in product_off %}
+    <tr>
+      <td scope="row">{{product.product}}</td>
+      <td scope="row">{{product.valid_from}}</td>
+      <td scope="row">{{product.valid_to}}</td>
+      <td scope="row">{{product.discount}}</td>
+      <td><a href={% url 'product_offer_view' product.id %} class='btn btn-outline-success'>View</a></td>
+      <td></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+
+
+{% endblock contents %}
+
+{% block pagejavascript %}
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#example').DataTable( {
+        "pagingType": "full_numbers",
+        buttons: ['copy', 'excel', 'pdf']
+    } );
+    
+} );
+$(document).ready(function() {
+    $('#category').DataTable( {
+        "pagingType": "full_numbers",
+        buttons: ['copy', 'excel', 'pdf']
+    } );
+    
+} );
+$(document).ready(function() {
+    $('#product').DataTable( {
+        "pagingType": "full_numbers",
+        buttons: ['copy', 'excel', 'pdf']
+    } );
+    
+} );
+  </script>
+{% endblock pagejavascript %}

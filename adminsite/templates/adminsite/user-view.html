@@ -1,0 +1,78 @@
+{% extends 'adminsite/index.html' %}
+
+{% block contents %}
+<div class="content">
+  <div class="container">
+    <h3>User Details</h3>
+    <div class="row mt-5">
+      <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+              <th scope="col">User:</th>
+              <th scope="col">{{user.username}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td scope="row">Phone:</td>
+              <td scope="row">{{user.phone_number}}</td>
+            </tr>
+            <tr>
+              <td scope="row">Email: </td>
+              <td scope="row">{{user.email}}</td>
+            </tr>
+            <tr>
+              <td scope="row">First Name: </td>
+              <td scope="row">{{user.first_name}}</td>
+            </tr>
+            <tr>
+              <td scope="row">Address: </td>
+              <td scope="row">{{address.apartment_address}}, {{address.street_address}}, {{address.country}}, {{address.zip}}</td>
+            </tr>
+          </tbody>
+      </table>
+      <a href={% url 'users' %} class="card-link btn btn-outline-success mx-2">Back</a>
+      <!-- Button trigger modal -->
+      {% if user.is_active %}
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+       Block
+      </button>
+      {% else %}
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+        Unblock
+       </button>
+      {% endif %}
+  </div>         
+</div>
+
+      
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Blocking User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        After blocking this user can't login to there accout
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        {% if user.is_active %}
+        <a href={% url 'block_user' user.id %} class="btn btn-danger">Block</a>
+        {% else %}
+        <a href={% url 'unblock_user' user.id %} class="btn btn-danger">Unblock</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        
+</div>
+{% endblock contents %}

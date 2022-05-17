@@ -1,0 +1,42 @@
+{% extends 'usersite/index.html' %}
+
+{% block title %}Edit Profile{% endblock title %}
+{% block contents %}
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+      <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+          <h1 class="font-weight-semi-bold text-uppercase mb-3">Profile</h1>
+          <div class="d-inline-flex">
+              <p class="m-0"><a href="{% url 'user-home' %}">Home</a></p>
+              <p class="m-0 px-2">-</p>
+              <p class="m-0">Profile</p>
+          </div>
+      </div>
+  </div>
+  <!-- Page Header End -->
+<div class="container">
+    <div class="row bg-secondary rounded shadow shadow-lg">
+        <div class="col-sm-12 mb-3">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="d-flex">
+                <div class="container-fluid mt-5 border-end">
+                    <h2>Personal Detail</h2>
+                    {{user_form.as_p}}
+                </div>
+                
+                <div class="container-fluid mt-5">
+                    <h2>Address Detail</h2>
+                    {{user_address.as_p}}
+                </div>
+            </div>
+            <div class="text-center">
+                <img class='d-block' id="existing_image" src="{{request.user.imageURL}}">
+                <div id="image_container">
+                <input type="submit" class="btn btn-info mt-3 text-center" value="Edit"></input>
+            </div>
+        </form>
+    </div>
+    </div>
+</div>
+{% endblock %}

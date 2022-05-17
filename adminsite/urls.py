@@ -1,0 +1,46 @@
+from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+from . import views
+
+urlpatterns = [
+    path('', views.home_page, name = 'admin_home'),
+    path('admin-login', views.admin_login, name = 'admin_login'),
+    path('admin-logout', views.admin_logout, name = 'admin_logout'),
+    path('users', views.list_users, name='users'),
+    path('user-view/<user_id>', views.view_users, name='view_user'),
+    path('block-user/<user_id>', views.block_user, name='block_user'),
+    path('unblock-user/<user_id>', views.unblock_user, name='unblock_user'),
+    path('categories', views.list_categories, name='categories'),
+    path('categories/view/<categories_id>', views.view_categories, name='view_categories'),
+    path('categories/edit/<categories_id>', views.edit_categories, name='edit_categories'),
+    path('categories/delete/<categories_id>', views.delete_categories, name='delete_categories'),
+    path('categories/add', views.add_categories, name='add_categories'),
+    path('products', views.list_products, name='products'),
+    path('products/add', views.add_products, name='add_products'),
+    path('products/view/<products_id>', views.view_products, name='view_products'),
+    path('products/delete/<products_id>', views.delete_products, name='delete_products'),
+    path('products/edit/<products_id>', views.edit_products, name='edit_products'),
+    path('orders', views.list_orders, name='orders'),
+    path('orders/view/<orders_id>', views.view_orders, name='view_orders'),
+    path('orders/edit/<orders_id>', views.edit_orders, name='edit_orders'),
+    path('admin_order_cancel/<orders_id>', views.admin_order_cancel, name='admin_order_cancel'),
+    path('search', views.search, name='search'),
+    path('chart/data', views.chart_details, name='chart_data'),
+    path('reports', views.reports, name='reports'),
+    path('report_genretor', views.report_genretor, name='report_genretor'),
+    path('offers', views.offers, name='offers'),
+    path('coupon_view/<coupon_id>', views.coupon_view, name='coupon_view'),
+    path('coupon_add', views.coupon_add, name='coupon_add'),
+    path('coupon_edit/<coupon_id>', views.coupon_edit, name='coupon_edit'),
+    path('coupon_delete/<coupon_id>', views.coupon_delete, name='coupon_delete'),
+    path('category_offer_view/<category_id>', views.category_offer_view, name='category_offer_view'),
+    path('category_offer_add', views.category_offer_add, name='category_offer_add'),
+    path('category_offer_edit/<category_id>', views.category_offer_edit, name='category_offer_edit'),
+    path('category_offer_delete/<category_id>', views.category_offer_delete, name='category_offer_delete'),
+    path('product_offer_view/<product_id>', views.product_offer_view, name='product_offer_view'),
+    path('product_offer_add', views.product_offer_add, name='product_offer_add'),
+    path('product_offer_edit/<product_id>', views.product_offer_edit, name='product_offer_edit'),
+    path('product_offer_delete/<product_id>', views.product_offer_delete, name='product_offer_delete'),
+    
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

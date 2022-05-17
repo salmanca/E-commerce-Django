@@ -1,0 +1,67 @@
+{% extends 'adminsite/index.html' %}
+
+{% block contents %}
+<link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet" />
+<div class="content">
+  <h3 class='mb-3'>Categories</h3>
+<table id="example" class="display" style="width:100%">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Number of Products</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+      <th scope="col"><a href={% url 'add_categories'%} class='btn btn-outline-info float-right'>Add</a></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for category in categories_page %}
+    <tr>
+      <th scope="row">{{category.name}}</th>
+      <th scope="row">{{category.products_set.all.count}}</th>
+      <td><a href="{% url 'edit_categories' category.id %}" class='btn btn-outline-success'>Edit</a></td>
+      <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#{{category.id}}">
+        Delete
+        </button><div class="modal fade" id="{{category.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Deleting</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Deleting this item
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <a href={% url 'delete_categories' category.id %} class="btn btn-danger">Delete</a>
+            </div>
+          </div>
+        </div>
+      </div></td>
+      <td></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock contents %}
+
+{% block pagejavascript %}
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#example').DataTable( {
+        "pagingType": "full_numbers",
+        buttons: ['copy', 'excel', 'pdf']
+    } );
+    
+} );
+  </script>
+{% endblock pagejavascript %}

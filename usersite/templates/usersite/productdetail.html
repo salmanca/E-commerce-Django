@@ -1,0 +1,144 @@
+{% extends 'usersite/index.html' %}
+{% load static %}
+{% block title %}Product Details{% endblock title %}
+{% block contents %}
+<style>
+* {box-sizing: border-box;}
+
+.img-zoom-container {
+  position: relative;
+}
+
+.img-zoom-lens {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  /*set the size of the lens:*/
+  width: 150px;
+  height: 150px;
+}
+
+.img-zoom-result {
+  border: 1px solid #d4d4d4;
+  /*set the size of the result div:*/
+  width: 500px;
+  height: 500px;
+}
+</style>
+<script>
+function imageZoom(imgID, resultID) {
+  var img, lens, result, cx, cy;
+  img = document.getElementById(imgID);
+  result = document.getElementById(resultID);
+  /*create lens:*/
+  lens = document.createElement("DIV");
+  lens.setAttribute("class", "img-zoom-lens");
+  /*insert lens:*/
+  img.parentElement.insertBefore(lens, img);
+  /*calculate the ratio between result DIV and lens:*/
+  cx = result.offsetWidth / lens.offsetWidth;
+  cy = result.offsetHeight / lens.offsetHeight;
+  /*set background properties for the result DIV:*/
+  result.style.backgroundImage = "url('" + img.src + "')";
+  result.style.backgroundSize = (img.width * cx) + "px " + (img.height * cy) + "px";
+  /*execute a function when someone moves the cursor over the image, or the lens:*/
+  lens.addEventListener("mousemove", moveLens);
+  img.addEventListener("mousemove", moveLens);
+  /*and also for touch screens:*/
+  lens.addEventListener("touchmove", moveLens);
+  img.addEventListener("touchmove", moveLens);
+  function moveLens(e) {
+    var pos, x, y;
+    /*prevent any other actions that may occur when moving over the image:*/
+    e.preventDefault();
+    /*get the cursor's x and y positions:*/
+    pos = getCursorPos(e);
+    /*calculate the position of the lens:*/
+    x = pos.x - (lens.offsetWidth / 2);
+    y = pos.y - (lens.offsetHeight / 2);
+    /*prevent the lens from being positioned outside the image:*/
+    if (x > img.width - lens.offsetWidth) {x = img.width - lens.offsetWidth;}
+    if (x < 0) {x = 0;}
+    if (y > img.height - lens.offsetHeight) {y = img.height - lens.offsetHeight;}
+    if (y < 0) {y = 0;}
+    /*set the position of the lens:*/
+    lens.style.left = x + "px";
+    lens.style.top = y + "px";
+    /*display what the lens "sees":*/
+    result.style.backgroundPosition = "-" + (x * cx) + "px -" + (y * cy) + "px";
+  }
+  function getCursorPos(e) {
+    var a, x = 0, y = 0;
+    e = e || window.event;
+    /*get the x and y positions of the image:*/
+    a = img.getBoundingClientRect();
+    /*calculate the cursor's x and y coordinates, relative to the image:*/
+    x = e.pageX - a.left;
+    y = e.pageY - a.top;
+    /*consider any page scrolling:*/
+    x = x - window.pageXOffset;
+    y = y - window.pageYOffset;
+    return {x : x, y : y};
+  }
+}
+</script>
+<div class="container-fluid bg-secondary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+        <h1 class="font-weight-semi-bold text-uppercase mb-3">Product Details</h1>
+        <div class="d-inline-flex">
+            <p class="m-0"><a href="{% url 'user-home' %}">Home</a></p>
+            <p class="m-0 px-2">-</p>
+            <p class="m-0">Product Details</p>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+<div class="container mt-5 mb-5">
+<div class="row d-flex justify-content-center">
+    <div class="col-md-10">
+        <div class="card">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="img-zoom-container d-flex">
+                        <img id="myimage" src="{{product.imageURL}}" width="350" height="">
+                        <div id="myresult" class="img-zoom-result float-rigth"></div>
+                      </div>
+                    <div class="images p-3 float-right">
+                        
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="product p-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center"> <a href={% url 'user-home' %}><i class="fa fa-long-arrow-left"></i> <span class="ml-1">Back</span></a> </div> <a href="{% url 'cart' %}"><i class="fa fa-shopping-cart text-muted"></i></a>
+                        </div>
+                        {% if product.offer != 0 %}<span class="badge badge-pill badge-primary">
+                          {{product.offer}}% OFF</span>                      
+                          {% endif %}
+                        <div class="mt-4 mb-3"> <span class="text-uppercase text-muted brand">{{product.title}}</span>
+                            <h5 class="text-uppercase">{{product.category.name}}</h5>
+
+  
+                                  <div class="price d-flex flex-row align-items-center"> <span class="act-price">₹{{product.offer_price}} </span> 
+                                    <br>                 
+                                    <div class="price d-flex flex-row align-items-center"> <del><span class="act-price">₹{{product.price}} </span></del>
+                                <div class="ml-2"> <small class="dis-price"></small> <span></span> </div>
+                            </div>
+                        </div>
+                        <p class="about">{{product.description}}.</p>
+                        <div class="cart mt-4 align-items-center"> <button data-product={{product.id}} data-action='add' class="btn btn-danger text-uppercase mr-2 px-4 update-cart">Add to cart</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+<script>
+imageZoom("myimage", "myresult");
+</script>
+
+{% endblock contents %}
+<!-- Page Header Start -->
