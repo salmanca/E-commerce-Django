@@ -130,9 +130,9 @@ def LogoutUser(request):
 def user_profile(request):
     user = request.user
     user_info = CustomUser.objects.get(username=user)
+    categories = Categories.objects.all()
     try:
         user_address = Address.objects.get(user = user_info.id)
-        categories = Categories.objects.all()
     except:
         user_address = None
     user_orders = Order.objects.filter(user=user, ordered = True)
