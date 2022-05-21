@@ -76,23 +76,25 @@ WSGI_APPLICATION = 'prokart.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
+
+if 'rds_name' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ['shipit'],
+            'USER': os.environ['postgres'],
+            'PASSWORD': os.environ['Salman@123'],
+            'HOST': os.environ[''],
+            'PORT': os.environ[''],
+        }
+    }
+else:
+    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'shipit',
-#         'USER': 'postgres',
-#         'PASSWORD': 'Salman@123',
-#         'HOST': '',
-#         'PORT': '',
-#     }
-# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
