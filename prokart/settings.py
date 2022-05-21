@@ -77,13 +77,13 @@ WSGI_APPLICATION = 'prokart.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 
-if 'rds_name' in os.environ:
+if 'env_prokart' in os.environ:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ['shipit'],
-            'USER': os.environ['postgres'],
-            'PASSWORD': os.environ['Salman@123'],
+            'NAME': os.environ[''],
+            'USER': os.environ[''],
+            'PASSWORD': os.environ[''],
             'HOST': os.environ[''],
             'PORT': os.environ[''],
         }
