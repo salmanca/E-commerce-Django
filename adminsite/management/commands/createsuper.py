@@ -1,9 +1,9 @@
 from django.core.management.base import BaseCommand
-from adminsite.models import CustomUser
+from django.contrib.auth.models import User
 
 
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        if not CustomUser.objects.filter(username="admin").exists():
-            CustomUser.objects.create_superuser("admin", "admin@admin.com", "admin")
+        if not User.objects.filter(username="admin").exists():
+            User.objects.create_superuser("admin", "admin@admin.com", "admin")
