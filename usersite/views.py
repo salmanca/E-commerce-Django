@@ -24,8 +24,8 @@ def LoginPage(request):
             if user is not None:
                 otp = request.POST['otp']
                 if otp == '':
-                    account_sid = os.environ['TWILIO_ACCOUNT_SID']
-                    auth_token = os.environ['TWILIO_AUTH_TOKEN']
+                    account_sid = 'ACcb8f5908b1cf5232ccf6773ef0cb9c6a'
+                    auth_token = '291822e127da6054eb41b1f5febfe6c3'
                     client = Client(account_sid, auth_token)
                     generate = random.randint(1000, 9999)
                     message = client.messages.create(
