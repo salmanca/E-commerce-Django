@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-s9%a3l0(9%&_1e^%krm+(xjxa*-ynvqfpm*x^#wo2n2hr-f83-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['morning-reaches-68242.herokuapp.com', 'salman-ecom.co', 'www.salman-ecom.co','127.0.0.1']
+ALLOWED_HOSTS = ['morning-reaches-68242.herokuapp.com', 'salman-ecom.co', 'www.salman-ecom.co']
 
 # Application definition
 
@@ -77,17 +77,17 @@ WSGI_APPLICATION = 'prokart.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'prokart',
-        'USER': 'postgres',
-        'PASSWORD': 'salman@123',  
-        'HOST':'127.0.0.1',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'prokart',
+#         'USER': 'postgres',
+#         'PASSWORD': 'salman@123',  
+#         'HOST':'127.0.0.1',
+#     }
+# }
 
-# DATABASES = {'default': dj_database_url.config(default='postgres://postgres:salman@123@localhost/prokart')}
+DATABASES = {'default': dj_database_url.config(default='postgres://postgres:salman@123@localhost/prokart')}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
