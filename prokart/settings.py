@@ -77,17 +77,17 @@ WSGI_APPLICATION = 'prokart.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'prokart',
-        'USER': 'postgres',
-        'PASSWORD': 'salman@123',  
-        'HOST':'127.0.0.1',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'prokart',
+#         'USER': 'postgres',
+#         'PASSWORD': 'salman@123',  
+#         'HOST':'127.0.0.1',
+#     }
+# }
 
-# DATABASES = {'default': dj_database_url.config(default='postgres://postgres:salman@123@localhost/prokart')}
+DATABASES = {'default': dj_database_url.config(default='postgres://postgres:salman@123@localhost/prokart')}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
