@@ -78,8 +78,6 @@ WSGI_APPLICATION = 'prokart.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASE = {"default": dj_database_url.config(default="postgres://postgres:salman@123@localhost/prokart")}
-
 # if 'RDS_DB_NAME' in os.environ:
 # DATABASES = {
 #     'default': {
@@ -97,6 +95,8 @@ DATABASE = {"default": dj_database_url.config(default="postgres://postgres:salma
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #         }
 #     }
+
+DATABASE = {"default": dj_database_url.config(default="postgres://postgres:salman@123@localhost/prokart")}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
