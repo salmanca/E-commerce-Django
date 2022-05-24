@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-s9%a3l0(9%&_1e^%krm+(xjxa*-ynvqfpm*x^#wo2n2hr-f83-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['morning-reaches-68242.herokuapp.com', 'salman-ecom.co', 'www.salman-ecom.co']
+ALLOWED_HOSTS = ['morning-reaches-68242.herokuapp.com', 'salman-ecom.co', 'www.salman-ecom.co', '127.0.0.1']
 
 # Application definition
 
@@ -77,26 +77,17 @@ WSGI_APPLICATION = 'prokart.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'prokart',
+        'USER': 'postgres',
+        'PASSWORD': 'salman@123',  
+        'HOST':'127.0.0.1',
+    }
+}
 
-# if 'RDS_DB_NAME' in os.environ:
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'prokart',
-#         'USER': 'postgres',
-#         'PASSWORD': 'salman@123',  
-#         'HOST':'127.0.0.1',
-#     }
-# }
-# else:
-#     DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#         }
-#     }
-
-DATABASES = {'default': dj_database_url.config(default='postgres://postgres:salman@123@localhost/prokart')}
+# DATABASES = {'default': dj_database_url.config(default='postgres://postgres:salman@123@localhost/prokart')}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -117,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 AUTH_USER_MODEL = 'adminsite.CustomUser'
 TWILIO_ACCOUNT_SID = 'ACcb8f5908b1cf5232ccf6773ef0cb9c6a'
-TWILIO_AUTH_TOKEN = 'd221c3264e93ca3097f21dfab847465a'
+TWILIO_AUTH_TOKEN = '291822e127da6054eb41b1f5febfe6c3'
 CRISPY_TEMPLATE_PACK = 'uni_form'
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
@@ -140,8 +131,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'adminsite/static')
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, "..", "www", "static")
-MEDIA_URL = 'uploaded/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'uploaded')
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type

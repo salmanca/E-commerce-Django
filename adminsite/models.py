@@ -42,7 +42,7 @@ class Products(models.Model):
     stock = models.IntegerField(blank=True, null=True)
     category = models.ForeignKey(Categories, on_delete=models.CASCADE)
     description = models.TextField()
-    image = models.ImageField(null=True, blank=True, upload_to = 'uploaded/product')
+    image = models.ImageField(null=True, blank=True, upload_to = 'product')
 
     def __str__(self):
         return self.title
