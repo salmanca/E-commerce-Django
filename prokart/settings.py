@@ -96,7 +96,7 @@ WSGI_APPLICATION = 'prokart.wsgi.application'
 #         }
 #     }
 
-DATABASE = {"default": dj_database_url.config(default="postgres://postgres:salman@123@localhost/prokart")}
+DATABASES = {'default': dj_database_url.config(default='postgres://postgres:salman@123@localhost/prokart')}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
