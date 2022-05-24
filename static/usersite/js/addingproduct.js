@@ -38,7 +38,7 @@ function updateNonUserOrder(procuctId, action) {
 
 function updateUserOrder(procuctId, action) {
     console.log("user is loged in sending data")
-    var url = 'http://127.0.0.1:8000/update'
+    var url = 'https://morning-reaches-68242.herokuapp.com/update'
     fetch(url, {
 
             method: 'POST',
