@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-s9%a3l0(9%&_1e^%krm+(xjxa*-ynvqfpm*x^#wo2n2hr-f83-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['prokartenv.eba-fr52kfum.us-west-2.elasticbeanstalk.com','prokart-django-env.eba-qh52mwwp.us-west-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['https://whispering-basin-58538.herokuapp.com', 'whispering-basin-58538.herokuapp.com']
 
 # Application definition
 
