@@ -142,6 +142,7 @@ def user_profile(request):
 def user_edit(request):
     user = request.user.id
     try:
+        user = CustomUser.objects.get(id = user).id
         address = Address.objects.get(user=user)
         categories = Categories.objects.all()
     except:
