@@ -1,17 +1,25 @@
 [
 {
     "model": "sessions.session",
-    "pk": "hlifizq45dv9dointx3ndgmsg5mknfvt",
+    "pk": "a9jfd376rblys7iqa0a43vkr4r5dddgi",
     "fields": {
-        "session_data": ".eJxVjDsOwjAQBe_iGln-ZW1T0nMGy9ldcADZUpxUiLuTSCmgnZn33iLldSlp7TynicRZaHH6ZWPGJ9dd0CPXe5PY6jJPo9wTedgur434dTnav4OSe9nWyngaNMfBRoPGQPAUARk9K_ZIeHPknNYQMgStsiUF4GBDZGOwlsTnC8jANuw:1nsPyu:vxUkcVqIRxiifjsM7o_wXsy1hmO4LCK8iug7zwZKQZ8",
-        "expire_date": "2022-06-04T14:21:24.115Z"
+        "session_data": ".eJxVjEEOwiAQRe_C2hCgyIBL9z0DmYFBqoYmpV0Z765NutDtf-_9l4i4rTVunZc4ZXERWpx-N8L04LaDfMd2m2Wa27pMJHdFHrTLcc78vB7u30HFXr81FUoW_NlZYg25GOfBF-0K0ICIwSXrFIQ0KBUoIEDmoBktGi7GqyzeH_IsOEQ:1nzakE:0H36ATFixrolhoy8kp9s8Amwa75TTnVVnuIYqlb-_6s",
+        "expire_date": "2022-06-24T09:15:54.270Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "g7t55quxf1j9iadcw23ir57a7ss74q5r",
+    "fields": {
+        "session_data": ".eJxVjEEOwiAQRe_C2hCgyIBL9z0DmYFBqoYmpV0Z765NutDtf-_9l4i4rTVunZc4ZXERWpx-N8L04LaDfMd2m2Wa27pMJHdFHrTLcc78vB7u30HFXr81FUoW_NlZYg25GOfBF-0K0ICIwSXrFIQ0KBUoIEDmoBktGi7GqyzeH_IsOEQ:1ntRC1:VtPkY6KX-7Xv96Iz_z3Lihl9Y1QLrmdZUzWcd-msmWo",
+        "expire_date": "2022-06-07T09:51:09.346Z"
     }
 },
 {
     "model": "adminsite.customuser",
     "fields": {
-        "password": "pbkdf2_sha256$216000$PTWDTy2nqwnF$Bg9s+JGuLGY1i3jeHJKCHVpU+DC5QuBI7gz8FQCaNu4=",
-        "last_login": "2022-05-21T14:21:23.981Z",
+        "password": "pbkdf2_sha256$216000$C5C5KfWdxFUG$kKtGT09H4kA+D5GFuEpTZ2CtkkGjUNW0vov1jrw/uIc=",
+        "last_login": "2022-06-10T09:15:54.267Z",
         "is_superuser": true,
         "username": "admin",
         "first_name": "",
@@ -19,9 +27,29 @@
         "email": "admin@gmail.com",
         "is_staff": true,
         "is_active": true,
-        "date_joined": "2022-05-18T06:05:15.964Z",
+        "date_joined": "2022-05-24T06:52:48.376Z",
         "phone_number": "",
-        "otp": null,
+        "otp": "1804",
+        "image": "",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "adminsite.customuser",
+    "fields": {
+        "password": "pbkdf2_sha256$216000$VcMDtLoNaou2$vjaHAvyVKmbvw57el+Z1jwTWuoOSe8Trs3dccxFRlqU=",
+        "last_login": "2022-06-10T09:10:40.120Z",
+        "is_superuser": false,
+        "username": "prokart",
+        "first_name": "prokart",
+        "last_name": "user",
+        "email": "munnassalman@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2022-06-10T09:09:47.488Z",
+        "phone_number": "9895767744",
+        "otp": "2030",
         "image": "",
         "groups": [],
         "user_permissions": []
@@ -29,9 +57,127 @@
 },
 {
     "model": "adminsite.categories",
+    "pk": 4,
+    "fields": {
+        "name": "Beauty & Personal care"
+    }
+},
+{
+    "model": "adminsite.categories",
+    "pk": 5,
+    "fields": {
+        "name": "Women's watches"
+    }
+},
+{
+    "model": "adminsite.products",
+    "pk": 3,
+    "fields": {
+        "title": "essence | Lash Princess False Lash Effect Mascara | Gluten & Cruelty Free",
+        "price": 580.0,
+        "stock": 20,
+        "category": 4,
+        "description": "If you receive this mascara UNWRAPPED, it did not come from essence cosmetics. NO FALSIES NEEDED! Lash Princess False Lash Mascara defines and separates lashes while achieving a bold look. DRAMATIC VOLUME: the conic shape fiber brush delivers dramatic volume and sculpted length WITHOUT clumps or globs. LASTS ALL DAY: go about your day free from flaking & fading! This mascara does not flake, fade, or wear, making it a perfect all-day, longlasting mascara. CRUELTY FREE: essence cosmetics is certified and acknowledged by PETA as a cruelty-free brand. We do not test any of our products on animals.",
+        "image": "product/my-image_uao7OpB.png"
+    }
+},
+{
+    "model": "adminsite.products",
+    "pk": 4,
+    "fields": {
+        "title": "Neutrogena Makeup Remover Cleansing Face Wipes, Daily Cleansing Facial Towelettes to Remove Waterpro",
+        "price": 700.0,
+        "stock": 15,
+        "category": 4,
+        "description": "Twin pack with 25-count each of ultra-soft, pre-moistened Neutrogena Makeup Remover Face Wipes with a micellar-infused triple emollient formula remove makeup and cleanse skin while leaving it feeling refreshed, soft, smooth and conditioned Makeup remover facial cleansing towelettes work to dissolve all traces of dirt, removes bacteria, impurities, oil and makeup on skin while also removing pollution, sweat and sunscreen, for superior cleansing and makeup removing power at your fingertips Facial cleansing wet wipes are ophthalmologist-, dermatologist-, and allergy-tested and gentle on the eyes. The effective formula removes up to 99% of makeup--even stubborn waterproof mascara--without tugging",
+        "image": "product/my-image_4ynTdsC.png"
+    }
+},
+{
+    "model": "adminsite.products",
+    "pk": 5,
+    "fields": {
+        "title": "Schick Hydro Silk Touch-Up Multipurpose Exfoliating Dermaplaning Tool, Eyebrow Razor, and Facial Raz",
+        "price": 360.0,
+        "stock": 20,
+        "category": 4,
+        "description": "Touch-ups are quick and easy with this versatile beauty tool that shapes eyebrows, removes fine hairs, and even smoothens skin High quality blades are uniquely designed with fine micro guards to help protect skin.Care and Cleaning: Rinse Clean Includes an extra attachment for precise eyebrow shaping.Keep out of reach of children Smooths skin by gently exfoliating. Care-soften area with lotion or shaving cream before shaving. Power Source: Manual Slim, portable size so you are ready for a touch-up anytime, anywhere",
+        "image": "product/my-image_ERA7458.png"
+    }
+},
+{
+    "model": "adminsite.products",
+    "pk": 6,
+    "fields": {
+        "title": "Keep in Touch Two-Tone Women Ladies Watches Waterproof Stainless Steel Ceramic Wristwatch",
+        "price": 1200.0,
+        "stock": 20,
+        "category": 5,
+        "description": "waterproof watches for women",
+        "image": "product/my-image_MDegvU7.png"
+    }
+},
+{
+    "model": "adminsite.address",
     "pk": 1,
     "fields": {
-        "name": "Women's Fashion"
+        "user": [
+            "admin"
+        ],
+        "street_address": "",
+        "apartment_address": "",
+        "country": "",
+        "zip": "",
+        "address_type": "",
+        "default": false
+    }
+},
+{
+    "model": "adminsite.address",
+    "pk": 2,
+    "fields": {
+        "user": [
+            "prokart"
+        ],
+        "street_address": "",
+        "apartment_address": "",
+        "country": "",
+        "zip": "",
+        "address_type": "",
+        "default": false
+    }
+},
+{
+    "model": "adminsite.coupon",
+    "pk": 1,
+    "fields": {
+        "code": "F1cop",
+        "valid_from": "2022-06-01T00:00:00Z",
+        "valid_to": "2022-06-30T00:00:00Z",
+        "discount": 20,
+        "active": true
+    }
+},
+{
+    "model": "adminsite.categoryoffer",
+    "pk": 1,
+    "fields": {
+        "category": 4,
+        "valid_from": "2022-06-01T00:00:00Z",
+        "valid_to": "2022-06-30T00:00:00Z",
+        "discount": 10,
+        "active": true
+    }
+},
+{
+    "model": "adminsite.productoffer",
+    "pk": 1,
+    "fields": {
+        "product": 6,
+        "valid_from": "2022-06-01T00:00:00Z",
+        "valid_to": "2022-06-30T00:00:00Z",
+        "discount": 15,
+        "active": true
     }
 }
 ]
